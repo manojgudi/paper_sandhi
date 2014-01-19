@@ -25,6 +25,7 @@
 \usepackage{amssymb} % assumes amsmath package installed
 \usepackage{graphicx}
 \usepackage{tabularx}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -87,7 +88,7 @@ However, this may not be very helpful for control engineers since most of the fl
 Thus, a separate scheduler called GNU Radio Advanced Scheduler is being developed to incorporate closed loop flow graphs. It uses C++ libaries such as Theron(concurrency library), PMC(Polymorphic Message Container for C++ library) etcetra.
 
 \subsection{Scope}
-Sandhi as aforementioned, uses GNU Radio at its core. GNU-Radio was identified as a very promising Data Acquisition(DAQ) tool, and hence Sandhi inherits following advantages-
+Sandhi, as aforementioned, uses GNU Radio at its core. GNU Radio was identified as a very promising Data Acquisition(DAQ) tool, and hence Sandhi inherits following advantages-
 
 \begin{itemize}
 \item It has a massive device driver library, thereby it supports a good range of DAQ cards from GNU Radio's UHD(Universal Software Radio Peripheral Hardware Driver) module and Comedi(data library based on Linux Kernel Drivers).
@@ -239,21 +240,22 @@ Getting Ubuntu images for Aakash tablet and instructions for setting it up is pr
 
 \section*{ACKNOWLEDGMENT}
 
-We'd like to thank the Department of Chemical Engineering and the FOSSEE Group, IIT Bombay for providing us with the resources. We would especially like to thank Professor Kannan Moudgalya, IIT Bombay and Josh Blum for their guidance and support for the project development.
+We'd like to thank the Department of Chemical Engineering and the FOSSEE Group, IIT Bombay for providing us with the resources. We would especially like to thank Professor Kannan Moudgalya, IIT Bombay, Ministry of Human Resource Development of Government of India(MHRD) and Josh Blum for their invaluable guidance, time and support for the project development.
+
 
 \begin{thebibliography}{99}
 
-	\bibitem{c1} GNU Radio- The Free \& Open Software Radio Ecosystem- Blocks Coding guide in C++ and tutorials for writing Python Application http://gnuradio.org/redmine/projects/gnuradio/wiki/BlocksCodingGuide
-	\bibitem{c2} Virtual Labs initiative http://en.wikipedia.org/wiki/Virtual\_Labs\_(India) 
-	\bibitem{c3} Inderpreet Arora, Kannan M. Moudgalya, Kaushik Venkata, Victor Chakraborty, Rupak Rokade and Rakhi R., A Low Cost, Scalable, Virtual Control Laboratory, Santiago, Chile, IEEE Conference on Control and Automation.
-	\bibitem{c4} Sciscipy: Scilab API for Python http://forge.scilab.org/index.php/p/sciscipy
-	\bibitem{c5} Linux on Aakash tablet https://github.com/androportal/linux-on-aakash
-	\bibitem{c6} GNU Radio Advanced Scheduler, developed by Josh Blum, Ettus Resarch, https://github.com/guruofquality/gras
-	\bibitem{c7} GNU Radio Python blocks Writing python blocks https://github.com/aviralchandra/gr-py\_block
+	\bibitem{c1} GNU Radio- The Free \& Open Software Radio Ecosystem- Blocks Coding guide in C++ and tutorials for writing Python Application \url{http://gnuradio.org/redmine/projects/gnuradio/wiki/BlocksCodingGuide}
+	\bibitem{c2} Virtual Labs initiative \url{http://en.wikipedia.org/wiki/Virtual\_Labs\_(India)}
+	\bibitem{c3} I. Arora, K.M. Moudgalya, K. Venkata, V. Chakraborty, Rokade, and R. Rakhi. A low cost, scalable, virtual control laboratory.{\it In Proceedings of the 9th IEEE International Conference on Control and Automation (ICCA), 2011,} Santiago, Chile, 19¿21 December 2011.
+	\bibitem{c4} Sciscipy: Scilab API for Python \url{http://forge.scilab.org/index.php/p/sciscipy}
+	\bibitem{c5} Linux on Aakash tablet \url{https://github.com/androportal/linux-on-aakash}
+	\bibitem{c6} GNU Radio Advanced Scheduler, developed by Josh Blum, Ettus Resarch, \url{https://github.com/guruofquality/gras}
+	\bibitem{c7} GNU Radio Python blocks Writing python blocks \url{https://github.com/aviralchandra/gr-py\_block}
 	\bibitem{c8} Jagdish Y. Patil, Balashish Dubey, Kannan M. Moudgalya, Rakesh Peter: GNU Radio, Scilab, Xcos and COMEDI for Data Acquisition and Control: An Open Source Alternative to LabVIEW, Article, IIT Bombay, Mumbai 400076
-	\bibitem{c9} Dictino Chaos, Jesus Chacon, Jose Antonio Lopez-Orozco and Sebastian Dormido : Virtual and Remote Robotic Laboratory Using EJS, MATLAB and LabVIEW
+	\bibitem{c9} Dictino Chaos, Jesus Chacon, Jose Antonio Lopez-Orozco and Sebastian Dormido : Virtual and Remote Robotic Laboratory Using EJS, MATLAB and LabVIEW{\it Sensors, 2013,} Baltimore, 4-6 November 2013.
 	\bibitem{c10} Kannan M. Moudgalya, "Proportional, Integral, Derivative Controllers" in Digital Control, Chichester, U.K., Wiley, 2007, pp. 301-319
-	\bibitem{c11} Scilab, open source software for numerical computation, http://www.scilab.org
+	\bibitem{c11} Scilab, open source software for numerical computation, \url{http://www.scilab.org}
 	\bibitem{c12} Dale E. Seborg, Thomas F. Edgar, Duncan A. Mellichamp, "Feedback Controllers" in Process Dynamics and Control, Second Edition, Hoboken, NJ, Wiley, 2004, pp. 185-200
 \end{thebibliography}
 
