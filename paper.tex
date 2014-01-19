@@ -4,6 +4,8 @@
 
 \documentclass[letterpaper, 10 pt, conference]{ieeeconf} % Comment this line out if you need a4paper
 
+
+
 %\documentclass[a4paper, 10pt, conference]{ieeeconf} % Use this line for a4 paper
 
 %\IEEEoverridecommandlockouts % This command is only needed if 
@@ -24,23 +26,23 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 
+\begin{document}
+
 \title{\LARGE \bf
 Sandhi: An open source alternative to LabVIEW
 }
 
 
-\author{Albert Author$^{1}$ and Bernard D. Researcher$^{2}$% <-this % stops a space
-\thanks{*This work was not supported by any organization}% <-this % stops a space
-\thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science,
-     University of Twente, 7500 AE Enschede, The Netherlands
-     {\tt\small albert.author@papercept.net}}%
-\thanks{$^{2}$Bernard D. Researcheris with the Department of Electrical Engineering, Wright State University,
-     Dayton, OH 45435, USA
-     {\tt\small b.d.researcher@ieee.org}}%
-}
+\author{\IEEEauthorblockN{Manoj Gudi\IEEEauthorrefmark{1},
+			  Aviral Chandra\IEEEauthorrefmark{2},
+		          Kannan M. Moudgalya\IEEEauthorrefmark{3}}
 
-
-\begin{document}
+	\IEEEauthorblockA{\IEEEauthorrefmark{1}FOSSEE, IIT Bombay, Mumbai 400076\\
+	manoj\_gudi@iitb.ac.in}
+	\IEEEauthorblockA{\IEEEauthorrefmark{2}Department of Chemical Engineering, IIT Bombay, Mumbai 400076\\
+	aviral\_chandra@iitb.ac.in}
+	\IEEEauthorblockA{\IEEEauthorrefmark{3}Department of Chemical Engineering, IIT Bombay, Mumbai 400076\\
+kannan@iitb.ac.in}}
 
 
 
@@ -76,11 +78,13 @@ The implementation of feedback was achieved by using a new application scheduler
 
 \subsection{GNU Radio Advanced Scheduler}
 
-GNU Radio is an open source radio implementation which is used by the Electrical Engineering community for the purpose of digital signal processing. It has a rich module of device drivers and thereby supports a range of devices. GNURadio is very promising visual programming tool as it makes it very easy for the developer to abstract his code, and provides a very easy to use framework to the developer. On top of all these advantages it is open source and hence making it potentially very attractive alternative to control system enthusiasts, who use SIMULINK/ LabVIEW for doing rapid prototyping of control schemes.
+GNU Radio is an open source radio implementation which is used by the Electrical Engineering community for the purpose of digital signal processing. It has a rich module of device drivers and thereby supports a range of devices. GNU Radio is very promising visual programming tool as it makes it very easy for the developer to abstract his code, and provides a very easy to use framework to the developer. On top of all these advantages it is open source and hence making it potentially very attractive alternative to control system enthusiasts, who use SIMULINK/ LabVIEW for doing rapid prototyping of control schemes.
 
 A flow graph in GNU Radio is visual representation of data flow between two or more nodes, and these nodes are called blocks (which process the flowing data). The main shortcoming of GNU Radio is its stock application scheduler's lack of ability to process closed loop in visual flow graph. This is a design choice made by the GNU Radio developers to keep the system efficient for real time applications. The job of the scheduler is to dispatch threads generated from visual flow graph; the way GNU Radio overcomes this lack of closed loops in flow graph is to implement loops in code of the block. For example, block of AGC(Automatic Gain Control) implements closed loop system in its code itself(hardcoded). This way GNU Radio ensures that flow graph always, is an acyclic directed graph. 
 
-However, this may not be very helpful for control system engineers since lot of their flow graphs have closed loops and hardcoding the blocks to make it open loop is counter-intutive. Thus, a separate scheduler called GNU Radio Advanced Scheduler is being developed to incorporate closed loop flow graphs. It uses C++ libaries such as Theron(concurrency library), PMC(Polymorphic Message Container for C++ library) etcetra.
+However, this may not be very helpful for control engineers since most of the flow graphs are closed-loops. Implementing closed loop system through hard coding defeats the purpose of a visual programming editor.
+
+Thus, a separate scheduler called GNU Radio Advanced Scheduler is being developed to incorporate closed loop flow graphs. It uses C++ libaries such as Theron(concurrency library), PMC(Polymorphic Message Container for C++ library) etcetra.
 
 \subsection{Scope}
 Sandhi as aforementioned, uses GNU Radio at its core. GNU-Radio was identified as a very promising Data Acquisition(DAQ) tool, and hence Sandhi inherits following advantages-
@@ -105,15 +109,15 @@ The following screenshots demonstrate simulations in Sandhi
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=90mm]{csim.png}
-	\caption{Continuous time simulation flow graph}
+	\includegraphics[width=90mm]{csim_closed.png}
+	\caption{Closed loop continuous time simulation flow graph}
 	\label{overflow}
 \end{figure}
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=90mm]{dsim.png}
-	\caption{Discrete time simulation flow graph}
+	\includegraphics[width=90mm]{dsim_closed.png}
+	\caption{Closed loop discrete time simulation flow graph}
 	\label{overflow}
 \end{figure}
 
@@ -129,7 +133,7 @@ The following screenshots demonstrate simulations in Sandhi
 \subsection{Plant-Controller Block}
 SBHS or Single Board Heater System is a small portable plant with time response of around 30 seconds developed at IIT Bombay. One can perform open loop tests as well as closed loop tests on SBHS. SBHS uses ATMega16 microcontroller for communication as well as control of the plant. It can be connected to any standard USB port of Laptop or PC using serial RS232 protocol. SBHS has 3 variables, temperature being a controlled variable and heater and fan (rpm) values being manipulated variables.
 
-So far we've been able to solve the servo problem using Sandhi. The work on regulatory problem is under-way. The controller controls the plant as per the backward difference equation 
+So far we've been able to solve the servo problem using Sandhi. The work on regulatory problem is under-way. The controller controls the plant as per the PID controller equation, implemented as the following backward difference equation-
 \begin{equation}
 	\begin{split}
 	u(t) =u(t-1) + K_c[e(t)-e(t-1)] +  {\frac{K_c T_s}{T_i}}e(t) + \\
@@ -157,7 +161,16 @@ But all of this is abstracted to the user, and he/she has to care only about the
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=90mm]{sbhs_sandhi.png}
-	\caption{Set point tracking of SBHS in Sandhi}
+	\caption{Set point tracking of temperature of SBHS in Sandhi}
+	\label{overflow}
+\end{figure}
+
+
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=90mm]{scope_plot.png}
+	\caption{Real time plot illustrating set point trajectory versus time}
 	\label{overflow}
 \end{figure}
 
@@ -213,7 +226,7 @@ We'd like to thank the Department of Chemical Engineering and the FOSSEE Group, 
 	\bibitem{c5} Linux on Aakash tablet https://github.com/androportal/linux-on-aakash
 	\bibitem{c6} GNU Radio Advanced Scheduler, developed by Josh Blum, Ettus Resarch, https://github.com/guruofquality/gras
 	\bibitem{c7} GNU Radio Python blocks Writing python blocks https://github.com/aviralchandra/gr-py\_block
-	\bibitem{c8} Jagdish Y. Patil, Balashish Dubey, Kannan M. Moudgalya, Rakesh Peter: GNURadio, Scilab, Xcos and COMEDI for Data Acquisition and Control: An Open Source Alternative to LabVIEW, Article, IIT Bombay, Mumbai 400076
+	\bibitem{c8} Jagdish Y. Patil, Balashish Dubey, Kannan M. Moudgalya, Rakesh Peter: GNU Radio, Scilab, Xcos and COMEDI for Data Acquisition and Control: An Open Source Alternative to LabVIEW, Article, IIT Bombay, Mumbai 400076
 	\bibitem{c9} Dictino Chaos1;*, Jes  ¿us Chac ¿on1, Jose Antonio Lopez-Orozco2 and Sebasti ¿an Dormido1 : Virtual and Remote Robotic Laboratory Using EJS, MATLAB and LabVIEW
 	\bibitem{c10} Kannan M. Moudgalya. Digital Control. John Wiley and Sons, 2009
 	\bibitem{c11} Scilab, open source software for numerical computation, www.scilab.org
