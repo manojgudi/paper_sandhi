@@ -1,5 +1,10 @@
 Paper for probable publication in Add Con Japan Control System Conference 2014.
 
+Packages required to compile this paper:
+
+sudo apt-get install texlive-base
+
+
 Trick:
 vimrc modification
 

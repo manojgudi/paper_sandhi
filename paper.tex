@@ -70,10 +70,17 @@ Sandhi is aimed at becoming a visual programming tool for replacing LabVIEW. It'
 
 It has been named Sandhi as it means connecting and conveys our idea of connecting various blocks to come up with a robust visual program.
 
-Sandhi is a pure python implementation using the GNU Radio's framework. It reaps advantage of Scilab's computational engine via sciscipy. Sciscipy is an Application Programming Interface aimed at Inter Process Communication with Scilab, when in the workspace of Python programming language.
+Sandhi is a pure python implementation using the GNU Radio's framework. It reaps advantage of Scilab's computational engine via Sciscipy. Sciscipy is an Application Programming Interface aimed at Inter Process Communication with Scilab, when in the workspace of Python programming language.
 
 The implementation of feedback was achieved by using a new application scheduler written specifically for this purpose. GRAS stands for GNU Radio Advanced Scheduler, it has been used in all the developments. It was impossible to implement the feedback with the stock application scheduler. Application Scheduler is responsible for threading, controlling the data flow and managing the use of the computer resources like processor time to various processes.
 
+\subsection{GNU Radio Advanced Scheduler}
+
+GNU Radio is an open source radio implementation which is used by the Electrical Engineering community for the purpose of digital signal processing. It has a rich module of device drivers and thereby supports a range of devices. GNURadio is very promising visual programming tool as it makes it very easy for the developer to abstract his code, and provides a very easy to use framework to the developer. On top of all these advantages it is open source and hence making it potentially very attractive alternative to control system enthusiasts, who use SIMULINK/ LabVIEW for doing rapid prototyping of control schemes.
+
+A flow graph in GNU Radio is visual representation of data flow between two or more nodes, and these nodes are called blocks (which process the flowing data). The main shortcoming of GNU Radio is its stock application scheduler's lack of ability to process closed loop in visual flow graph. This is a design choice made by the GNU Radio developers to keep the system efficient for real time applications. The job of the scheduler is to dispatch threads generated from visual flow graph; the way GNU Radio overcomes this lack of closed loops in flow graph is to implement loops in code of the block. For example, block of AGC(Automatic Gain Control) implements closed loop system in its code itself(hardcoded). This way GNU Radio ensures that flow graph always, is an acyclic directed graph. 
+
+However, this may not be very helpful for control system engineers since lot of their flow graphs have closed loops and hardcoding the blocks to make it open loop is counter-intutive. Thus, a separate scheduler called GNU Radio Advanced Scheduler is being developed to incorporate closed loop flow graphs. It uses C++ libaries such as Theron(concurrency library), PMC(Polymorphic Message Container for C++ library) etcetra.
 
 \subsection{Scope}
 Sandhi as aforementioned, uses GNU Radio at its core. GNU-Radio was identified as a very promising Data Acquisition(DAQ) tool, and hence Sandhi inherits following advantages-
@@ -99,14 +106,14 @@ The following screenshots demonstrate simulations in Sandhi
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=90mm]{csim.png}
-	\caption{Continuous time simulation flowgraph}
+	\caption{Continuous time simulation flow graph}
 	\label{overflow}
 \end{figure}
 
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=90mm]{dsim.png}
-	\caption{Discrete time simulation flowgraph}
+	\caption{Discrete time simulation flow graph}
 	\label{overflow}
 \end{figure}
 
